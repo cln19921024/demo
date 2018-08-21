@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Title</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #5bc0de;
+        }
+    </style>
+</head>
+
+<body>
+<div class="content container">
+    <form id="uploadForm" name="uploadForm"
+          enctype="multipart/form-data">
+        <div class="form-group">
+            <label>想写点什么呢</label>
+            <input class="form-control" name="title">
+        </div>
+        <div class="form-control">
+            <label>选择文件</label>
+            <input class="form-control" type="file" name="file" id="selPic">
+        </div>
+        <img id="show" src="">
+
+
+        <button class="btn" type="button" id="doSave">提交</button>
+
+
+    </form>
+
+
+</div>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<!--<script type="text/javascript" src="js/jquery-ui.min.js"></script>-->
+<script type="text/javascript" src="js/jquery.form.js"></script>
+
+<script>
+    $(function () {
+
+        $("#doSave")
+            .click(
+                function () {
+                    $("#uploadForm")
+                        .ajaxSubmit(
+                            {
+                                type: 'post',
+                                url: "/uploadFile",
+
+                                //data:  //注意只要是写在表单里面的，都不需要加这个属性。在controller中可以根据@RequestParam String str获取到属性值。
+                                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                                success: function (data) {
+                                    //接受到的data还只是一个字符串，需要转成json对象
+
+                                },
+                                error: function (data)//服务器响应失败处理函数
+                                {
+                                    alert("出错");
+                                }
+                            });
+                });
+        $("#selPic").on("change", function () {
+            var file = this.files[0];
+            console.log(file);
+//           var createObjectURL = function(blob){
+//               return window[window.webkitURL ? 'webkitURL' : 'URL']['createObjectURL'](blob);
+//           };
+            if (/^image\/png$|jpeg$/.test(file.type)) {
+                var uuu = URL.createObjectURL(file);
+                console.log(uuu);
+                $("#show").attr("src", uuu);
+            } else {
+                alert("Please choose an image file with jpg jpeg png.");
+            }
+        });
+
+    })
+</script>
+</body>
+
+</html>

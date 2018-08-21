@@ -1,0 +1,89 @@
+CREATE TABLE IF NOT EXISTS class_do(
+  uuid VARCHAR(36) PRIMARY KEY ,
+  class_name VARCHAR(100) UNIQUE NOT NULL ,
+  level int COMMENT '优先级'NOT NULL ,
+  create_time DATETIME  NOT NULL DEFAULT current_timestamp,
+  modify_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE current_timestamp);
+
+
+CREATE TABLE IF NOT EXISTS pic(
+  uuid VARCHAR(36)PRIMARY KEY ,
+  class_id VARCHAR(36),
+  title VARCHAR(200),
+  pic_link VARCHAR(100),
+  create_time DATETIME  NOT NULL DEFAULT current_timestamp,
+  modify_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+  CREATE TABLE IF NOT EXISTS user(
+    uuid VARCHAR(36) PRIMARY KEY ,
+    username VARCHAR(50),
+    password VARCHAR(50),
+    create_time DATETIME  NOT NULL DEFAULT current_timestamp,
+    modify_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+
+  );
+
+
+CREATE TABLE IF NOT EXISTS role(
+  uuid VARCHAR(36) PRIMARY KEY ,
+  name VARCHAR(50),
+  create_time DATETIME  NOT NULL DEFAULT current_timestamp,
+  modify_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+
+CREATE TABLE IF NOT EXISTS resources(
+  uuid VARCHAR(36)PRIMARY KEY ,
+  name VARCHAR(50),
+  resources_type  VARCHAR(40),
+  resources_string VARCHAR(200),
+  description VARCHAR(100),
+  enabled int,
+  create_time DATETIME  NOT NULL DEFAULT current_timestamp,
+  modify_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+  CREATE TABLE IF NOT EXISTS priority(
+    uuid VARCHAR(36) PRIMARY KEY ,
+    name VARCHAR(50),
+    description VARCHAR(100),
+    enabled int ,
+    create_time DATETIME  NOT NULL DEFAULT current_timestamp,
+    modify_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  );
+
+
+
+CREATE TABLE IF NOT EXISTS role_user(
+  uuid VARCHAR(36) PRIMARY KEY ,
+  user_id VARCHAR(36),
+  role_id VARCHAR(36),
+  enabled int ,
+  create_time DATETIME  NOT NULL DEFAULT current_timestamp,
+  modify_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+
+);
+
+
+CREATE TABLE IF NOT EXISTS role_priority(
+  uuid VARCHAR(36) PRIMARY KEY ,
+  role_id VARCHAR(36),
+  pri_id VARCHAR(36),
+  enabled int ,
+  create_time DATETIME  NOT NULL DEFAULT current_timestamp,
+  modify_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE IF NOT EXISTS  pri_resources(
+  uuid VARCHAR(36) PRIMARY KEY ,
+  pri_id VARCHAR(36),
+  res_id VARCHAR(36),
+  enabled int ,
+  create_time DATETIME  NOT NULL DEFAULT current_timestamp,
+  modify_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)
