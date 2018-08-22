@@ -34,12 +34,17 @@ public class indexController {
     public String index(){
         return "index";
     }
+
     @RequestMapping(value = "/getList")
     public String getList(){
         List<BikePositionDO> list=new ArrayList();
         list=bikeService.getList();
         System.out.println(list.size());
         return "index";
+    }
+    @RequestMapping(value = "/home")
+    public String home(){
+        return "home";
     }
     @RequestMapping(value = "/test")
     public String test(){

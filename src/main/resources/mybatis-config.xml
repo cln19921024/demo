@@ -13,5 +13,6 @@
         <mapper resource="mybatis/mapper/BikePositionMapper.xml"></mapper>
         <mapper resource="mybatis/mapper/ClassMapper.xml"></mapper>
         <mapper resource="mybatis/mapper/PicMapper.xml"></mapper>
+        <mapper resource="mybatis/mapper/UserMapper.xml"></mapper>
     </mappers>
 </configuration>
